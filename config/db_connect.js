@@ -2,7 +2,7 @@
 
 const mongoose = require("mongoose");
 const path = "mongodb://localhost:27017/e_commerce";
-const connection_uri = process.env.MONGODB_URI || process.env.CONNECT_URI;
+const connection_uri = process.env.MONGODB_URI || path;
 
 mongoose.Promise = global.Promise;
 mongoose

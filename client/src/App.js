@@ -94,7 +94,7 @@ class App extends Component {
 		if (localStorage.getItem("token")) {
 			const userId = localStorage.getItem("token");
 			const decoded = decode(userId);
-			role = decoded.user_role[0];
+			role = decoded.user_role;
 		}
 		const { classes } = this.props;
 

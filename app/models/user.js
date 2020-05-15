@@ -67,6 +67,12 @@ userSchema.pre("save", function(next) {
 		bcryptjs.genSalt(10).then(salt => {
 			bcryptjs.hash(this.password, salt).then(hashpassword => {
 				this.password = hashpassword;
+				User.countDocuments()
+                .then(count => {
+                    if(count == 0){
+                        this.role = "admin"
+                    }
+                })
 				next();
 			});
 		});
@@ -107,7 +113,7 @@ userSchema.methods.generateByToken = function() {
 		user_role: user.role
 	};
 
-	const token = jwt.sign(userid, "9849084994");
+	const token = jwt.sign(userid, "dct");
 
 	user.tokens.push({ token });
 	return user
@@ -122,7 +128,7 @@ userSchema.methods.generateByToken = function() {
 userSchema.statics.findByToken = function(token) {
 	let tokenData;
 	try {
-		tokenData = jwt.verify(token, "9849084994");
+		tokenData = jwt.verify(token, "dct");
 	} catch (err) {
 		return Promise.reject(err);
 	}

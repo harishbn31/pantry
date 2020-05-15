@@ -51,11 +51,11 @@ class Categories extends Component {
 	render() {
 		const { classes } = this.props;
 		const { open } = this.state;
-		let role = "";
+		let role = "admin";
 		if (localStorage.getItem("token")) {
 			const userId = localStorage.getItem("token");
 			const decoded = decode(userId);
-			role = decoded.user_role[0];
+			// role = decoded.user_role[0];
 		}
 
 		if (this.state.categories.length === 0) {

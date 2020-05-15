@@ -77,7 +77,7 @@ class Product extends Component {
 			products: [],
 			search: "",
 			reviews: [],
-			isLoad: false,
+			isLoad: true,
 
 			avarageReview: ""
 		};
@@ -98,11 +98,12 @@ class Product extends Component {
 	};
 	render() {
 		const { classes } = this.props;
-		let role = "";
+		let role = "admin";
 		if (localStorage.getItem("token")) {
 			const userId = localStorage.getItem("token");
 			const decoded = decode(userId);
-			role = decoded.user_role[0];
+			// role = decoded.user_role[0];
+			// console.log(decoded)
 		}
 
 		let count = 0;
@@ -147,9 +148,9 @@ class Product extends Component {
 		if (this.state.products.length === 0) {
 			return (
 				<div>
-					<center>
+					{/* <center>
 						<CircularProgress className={classes.progress} color="secondary" />
-					</center>
+					</center> */}
 					{role === "admin" && (
 						<Button
 							variant="outlined"
