@@ -51,10 +51,10 @@ userSchema = new Schema({
 		type: [String],
 		default: ["user"]
 	},
-	review: {
+	review: [{
 		type: Schema.Types.ObjectId,
 		ref: "Review"
-	},
+	}],
 	cart: [cartSchema],
 	monthlyCart: [monthlyCartSchema],
 	address: [addressSchema],

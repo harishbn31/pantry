@@ -15,6 +15,7 @@ const styles = theme => ({
 });
 class AddProduct extends Component {
 	handleSubmit = data => {
+		console.log(data)
 		axios
 			.post("/products", data, {
 				headers: {

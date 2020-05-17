@@ -51,19 +51,20 @@ class Categories extends Component {
 	render() {
 		const { classes } = this.props;
 		const { open } = this.state;
-		let role = "admin";
+		let role = "";
 		if (localStorage.getItem("token")) {
 			const userId = localStorage.getItem("token");
 			const decoded = decode(userId);
-			// role = decoded.user_role[0];
+			role = decoded.user_role[0];
+			// console.log(decoded)
 		}
 
 		if (this.state.categories.length === 0) {
 			return (
 				<div>
-					<center>
+					{/* <center>
 						<CircularProgress className={classes.progress} color="secondary" />
-					</center>
+					</center> */}
 					{role === "admin" && (
 						<Button
 							variant="outlined"
@@ -98,13 +99,15 @@ class Categories extends Component {
 						>
 							Categories
 						</Button>
-						<Popper
+						
+						{/* <Popper
 							open={open}
 							anchorEl={this.anchorEl}
 							transition
 							disablePortal
-						>
-							{({ TransitionProps, placement }) => (
+						> */}
+							
+							{/* {({ TransitionProps, placement }) => (
 								<Grow
 									{...TransitionProps}
 									id="menu-list-grow"
@@ -112,9 +115,10 @@ class Categories extends Component {
 										transformOrigin:
 											placement === "bottom" ? "center top" : "center bottom"
 									}}
-								>
-									<Paper>
-										<ClickAwayListener onClickAway={this.handleClose}>
+								> */}
+									{/* <Paper>
+										
+										<ClickAwayListener onClickAway={this.handleClose}> */}
 											<MenuList>
 												{this.state.categories.map(category => {
 													return (
@@ -125,7 +129,7 @@ class Categories extends Component {
 															<Link
 																style={{
 																	textDecoration: "none",
-																	color: "#F50057"
+																	color: "black"
 																}}
 																to={`/categories/${category._id}`}
 															>
@@ -135,11 +139,11 @@ class Categories extends Component {
 													);
 												})}
 											</MenuList>
-										</ClickAwayListener>
-									</Paper>
-								</Grow>
-							)}
-						</Popper>
+										{/* </ClickAwayListener>
+									</Paper> */}
+								{/* </Grow>
+							)} */}
+						{/* </Popper> */}
 					</div>
 					{role === "admin" && (
 						<Button

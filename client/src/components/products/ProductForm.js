@@ -139,14 +139,23 @@ class ProductForm extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		//when we send the images with text  req.file has body send it img also text also like this way
-		const data = new FormData();
-		data.append("name", this.state.name);
-		data.append("description", this.state.description);
-		data.append("price", this.state.price);
-		data.append("stock", this.state.stock);
-		data.append("isCod", this.state.isCod);
-		data.append("category", this.state.category);
-		data.append("imageUrl", this.state.imageUrl);
+		const data = {
+			name: this.state.name,
+			description: this.state.description,
+			price: this.state.price,
+			isCod: this.state.isCod,
+			category: this.state.category,
+			stock: this.state.stock
+		}
+		// const data = new FormData();
+		// data.append("name", this.state.name);
+		// data.append("description", this.state.description);
+		// data.append("price", this.state.price);
+		// data.append("stock", this.state.stock);
+		// data.append("isCod", this.state.isCod);
+		// data.append("category", this.state.category);
+		// data.append("imageUrl", this.state.imageUrl);
+		this.props.handleSubmit(data);
 		if (
 			this.state.name.length < 3 &&
 			this.state.description.length < 5 &&
@@ -214,19 +223,6 @@ class ProductForm extends Component {
 				nameError: "",
 				nError: false
 			}));
-		} else if (this.state.imageUrl === null) {
-			this.setState(() => ({
-				imageError: "Upload Image",
-				iError: true,
-				stockError: "",
-				sError: false,
-				priceError: " ",
-				pError: false,
-				descriptionError: "",
-				dError: false,
-				nameError: "",
-				nError: false
-			}));
 		} else {
 			this.setState(() => ({
 				imageError: "",
@@ -240,7 +236,7 @@ class ProductForm extends Component {
 				nameError: "",
 				nError: false
 			}));
-			this.props.handleSubmit(data);
+			
 		}
 	};
 	render() {

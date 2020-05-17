@@ -98,11 +98,11 @@ class Product extends Component {
 	};
 	render() {
 		const { classes } = this.props;
-		let role = "admin";
+		let role = "";
 		if (localStorage.getItem("token")) {
 			const userId = localStorage.getItem("token");
 			const decoded = decode(userId);
-			// role = decoded.user_role[0];
+			role = decoded.user_role[0];
 			// console.log(decoded)
 		}
 

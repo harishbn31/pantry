@@ -1,11 +1,11 @@
 const express = require("express");
-const multer = require("multer");
-const multerS3 = require("multer-s3");
-const aws = require("aws-sdk");
+// const multer = require("multer");
+// const multerS3 = require("multer-s3");
+// const aws = require("aws-sdk");
 
 //var upload = multer({ dest: "uploads/" }); //anthor way to upload
 const router = express.Router();
-const path = require("path");
+// const path = require("path");
 const { Product } = require("../models/product");
 const {
 	autherizationByUser
@@ -14,35 +14,35 @@ const {
 	authenticationByUser
 } = require("../controllers/middlewares/authenticate");
 const { Category } = require("../models/category");
-aws.config.update({
-	// Your SECRET ACCESS KEY from AWS should go here,
-	// Never share it!
-	// Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
+// aws.config.update({
+// 	// Your SECRET ACCESS KEY from AWS should go here,
+// 	// Never share it!
+// 	// Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
 
-	secretAccessKey: process.env.SECRETACCESS_KEY,
-	// Not working key, Your ACCESS KEY ID from AWS should go here,
-	// Never share it!
-	// Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
+// 	secretAccessKey: process.env.SECRETACCESS_KEY,
+// 	// Not working key, Your ACCESS KEY ID from AWS should go here,
+// 	// Never share it!
+// 	// Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
 
-	accessKeyId: process.env.ACCESS_KEYID,
-	region: "us-east-1" // region of your bucket
-});
+// 	accessKeyId: process.env.ACCESS_KEYID,
+// 	region: "us-east-1" // region of your bucket
+// });
 
-const s3 = new aws.S3();
+// const s3 = new aws.S3();
 
-const upload = multer({
-	storage: multerS3({
-		s3: s3,
-		bucket: "monthly-commerce",
-		acl: "public-read",
-		metadata: function(req, file, cb) {
-			cb(null, { fieldName: file.fieldname });
-		},
-		key: function(req, file, cb) {
-			cb(null, Date.now().toString() + file.originalname);
-		}
-	})
-});
+// const upload = multer({
+// 	storage: multerS3({
+// 		s3: s3,
+// 		bucket: "monthly-commerce",
+// 		acl: "public-read",
+// 		metadata: function(req, file, cb) {
+// 			cb(null, { fieldName: file.fieldname });
+// 		},
+// 		key: function(req, file, cb) {
+// 			cb(null, Date.now().toString() + file.originalname);
+// 		}
+// 	})
+// });
 // var storage = multer.diskStorage({
 // 	destination: function(req, file, callback) {
 // 		//with out function callback use directely destination:"./public/uploads/"
@@ -96,13 +96,12 @@ router.get("/:id", (req, res) => {
 router.post(
 	"/",
 	authenticationByUser,
-	autherizationByUser,
-	upload.single("imageUrl"),
 	(req, res) => {
 		// const dest = req.file.destination;
 		// const imagePath =
 		// 	"http://localhost:3001" + dest.slice(1) + req.file.filename;
 		const user = req.user;
+		console.log(req.body)
 		const product = new Product(
 			{
 				name: req.body.name,
@@ -110,10 +109,8 @@ router.post(
 				price: req.body.price,
 				stock: req.body.stock,
 				isCod: req.body.isCod,
-				category: req.body.category,
-				imageUrl: req.file.location
-			},
-			req.user._id
+				category: req.body.category
+			}
 		);
 
 		product
@@ -122,14 +119,13 @@ router.post(
 				res.send(product);
 			})
 			.catch(err => {
-				res.status(500).send({ statusText: "internal server error" });
+				res.status(500).send(err);
 			});
 	}
 );
 
 router.put(
 	"/:id",
-	upload.single("imageUrl"),
 	authenticationByUser,
 	autherizationByUser,
 	(req, res) => {
@@ -146,8 +142,7 @@ router.put(
 					price: req.body.price,
 					stock: req.body.stock,
 					isCod: req.body.isCod,
-					category: req.body.category,
-					imageUrl: req.file.location
+					category: req.body.category
 				}
 			},
 			{
