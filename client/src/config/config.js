@@ -1,6 +1,7 @@
-import Axios from "axios";
+import Axios from 'axios'
+const URL = window.location.origin.includes('localhost') ? "http://localhost:3001" : "/"
 const axios = Axios.create({
-	// baseURL: "http://localhost:3001"
-	baseURL: "http://localhost:3001"
-});
-export default axios;
+  baseURL: URL
+})
+
+export default axios
