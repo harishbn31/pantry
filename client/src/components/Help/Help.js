@@ -72,10 +72,7 @@ class Help extends React.Component {
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Typography>
-							Due to certain regulatory and operational restrictions, we are
-							unable to offer certain payment methods. As a result, customers
-							from these states will be able to place orders only up to a
-							certain value
+							While filling any form check validations
 						</Typography>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
@@ -86,7 +83,7 @@ class Help extends React.Component {
 				>
 					<ExpansionPanelSummary>
 						<Typography>
-							Standard Shipping Speeds and Delivery Charges #2
+							Monthly Cart Subscription we are working.
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
@@ -110,7 +107,7 @@ class Help extends React.Component {
 					<ExpansionPanelDetails>
 						<Typography>
 							We can help with your orders and your payments orther releted
-							topics please contact dct@dct.com
+							topics please contact team.
 						</Typography>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
