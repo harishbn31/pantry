@@ -127,13 +127,11 @@ class Home extends React.Component {
 					<Typography
 						style={{
 							color: "rgb(9, 63, 117)",
-							fontSize: "30px",
 							marginTop: "50px"
 						}}
 					>
-						site home page under construction <br />
-						sorry for the inconvenience <br />
-						we will get back soon
+						<img src="/ecommerce.jpg" alt="ecommerce" />
+						
 					</Typography>
 				</center>
 

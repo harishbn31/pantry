@@ -1,9 +1,9 @@
 const express = require("express");
-// const multer = require("multer");
+const multer = require("multer");
 // const multerS3 = require("multer-s3");
 // const aws = require("aws-sdk");
 
-//var upload = multer({ dest: "uploads/" }); //anthor way to upload
+var upload = multer({ dest: "uploads/" }); //anthor way to upload
 const router = express.Router();
 // const path = require("path");
 const { Product } = require("../models/product");
@@ -43,15 +43,15 @@ const { Category } = require("../models/category");
 // 		}
 // 	})
 // });
-// var storage = multer.diskStorage({
-// 	destination: function(req, file, callback) {
-// 		//with out function callback use directely destination:"./public/uploads/"
-// 		callback(null, "./public/uploads/");
-// 	},
-// 	filename: function(req, file, callback) {
-// 		callback(null, Date.now() + "-" + file.originalname);
-// 	}
-// });
+var storage = multer.diskStorage({
+	destination: function(req, file, callback) {
+		//with out function callback use directely destination:"./public/uploads/"
+		callback(null, "./public/uploads/");
+	},
+	filename: function(req, file, callback) {
+		callback(null, Date.now() + "-" + file.originalname);
+	}
+});
 // function fileFilter(req, file, callback) {
 // 	if (file.mimetype == "image/jpg" || file.mimetype == "image/png") {
 // 		// To accept the file pass `true`, like so:
@@ -109,7 +109,8 @@ router.post(
 				price: req.body.price,
 				stock: req.body.stock,
 				isCod: req.body.isCod,
-				category: req.body.category
+				category: req.body.category,
+				imageUrl: "https://via.placeholder.com/150"
 			}
 		);
 
@@ -142,7 +143,8 @@ router.put(
 					price: req.body.price,
 					stock: req.body.stock,
 					isCod: req.body.isCod,
-					category: req.body.category
+					category: req.body.category,
+					imageUrl: "https://via.placeholder.com/150"
 				}
 			},
 			{

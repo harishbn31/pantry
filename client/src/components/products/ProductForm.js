@@ -161,8 +161,7 @@ class ProductForm extends Component {
 			this.state.description.length < 5 &&
 			!this.state.price &&
 			!this.state.category &&
-			!this.state.stock &&
-			!this.state.imageUrl
+			!this.state.stock
 		) {
 			this.setState(() => ({
 				nameError: "Write > 3 chars",

@@ -338,8 +338,7 @@ class App extends Component {
 						<div id="bottomHalf">
 							<div id="sections">
 								<div className="section">
-									© 20018 - 2019, DCT Academy Services Private Ltd. or its
-									affiliates. All rights reserved.
+									© 2019 - 2020, All rights reserved.
 								</div>
 
 								<div className="section">
@@ -348,7 +347,7 @@ class App extends Component {
 											color: "white",
 											textDecoration: "none",
 											float: "left",
-											marginLeft: "910px"
+											marginLeft: "850px"
 										}}
 										to="/products"
 									>
