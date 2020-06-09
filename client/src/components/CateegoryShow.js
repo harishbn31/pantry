@@ -244,7 +244,7 @@ class CategoryShow extends Component {
 											<Typography style={{ color: "green" }}>
 												{product.category.name}
 											</Typography>
-											{this.state.isLoad &&
+											{this.state.isLoad && this.state.reviews.length > 0 &&
 												this.state.reviews.map(review => {
 													if (review.product === product._id) {
 														return (
