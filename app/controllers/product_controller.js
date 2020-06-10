@@ -43,15 +43,15 @@ const { Category } = require("../models/category");
 // 		}
 // 	})
 // });
-var storage = multer.diskStorage({
-	destination: function(req, file, callback) {
-		//with out function callback use directely destination:"./public/uploads/"
-		callback(null, "./public/uploads/");
-	},
-	filename: function(req, file, callback) {
-		callback(null, Date.now() + "-" + file.originalname);
-	}
-});
+// var storage = multer.diskStorage({
+// 	destination: function(req, file, callback) {
+// 		//with out function callback use directely destination:"./public/uploads/"
+// 		callback(null, "./public/uploads/");
+// 	},
+// 	filename: function(req, file, callback) {
+// 		callback(null, Date.now() + "-" + file.originalname);
+// 	}
+// });
 // function fileFilter(req, file, callback) {
 // 	if (file.mimetype == "image/jpg" || file.mimetype == "image/png") {
 // 		// To accept the file pass `true`, like so:
@@ -95,13 +95,12 @@ router.get("/:id", (req, res) => {
 
 router.post(
 	"/",
-	authenticationByUser,
+	authenticationByUser,upload.single("imageUrl"),
 	(req, res) => {
-		// const dest = req.file.destination;
-		// const imagePath =
-		// 	"http://localhost:3001" + dest.slice(1) + req.file.filename;
+		const dest = req.file.destination;
+		const imagePath = 'http://localhost:3001/'+dest + req.file.filename;
 		const user = req.user;
-		console.log(req.body)
+		// console.log(req.body)
 		const product = new Product(
 			{
 				name: req.body.name,
@@ -110,7 +109,7 @@ router.post(
 				stock: req.body.stock,
 				isCod: req.body.isCod,
 				category: req.body.category,
-				imageUrl: "https://via.placeholder.com/150"
+				imageUrl: imagePath
 			}
 		);
 
@@ -128,11 +127,10 @@ router.post(
 router.put(
 	"/:id",
 	authenticationByUser,
-	autherizationByUser,
+	autherizationByUser,upload.single("imageUrl"),
 	(req, res) => {
-		// const dest = req.file.destination;
-		// const imagePath =
-		// 	"http://localhost:3001" + dest.slice(1) + req.file.filename;
+		const dest = req.file.destination;
+		const imagePath = 'http://localhost:3001/'+dest + req.file.filename;
 		const user = req.user._id;
 		Product.findOneAndUpdate(
 			{ _id: req.params.id },
@@ -144,7 +142,7 @@ router.put(
 					stock: req.body.stock,
 					isCod: req.body.isCod,
 					category: req.body.category,
-					imageUrl: "https://via.placeholder.com/150"
+					imageUrl: imagePath
 				}
 			},
 			{

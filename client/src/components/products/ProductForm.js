@@ -79,7 +79,7 @@ class ProductForm extends Component {
 			stockError: "",
 			sError: false,
 			isCod: props.isCod ? props.isCod : "true",
-			category: props.category ? props.category : "",
+			category: props.category ? props.category._id : "",
 			categoryError: "",
 			cError: false,
 			imageUrl: props.imageUrl ? props.imageUrl : null,
@@ -98,6 +98,7 @@ class ProductForm extends Component {
 			.catch(err => {
 				console.log(err);
 			});
+			// console.log('props',this.props.category)
 	}
 
 	handleName = e => {
@@ -139,22 +140,22 @@ class ProductForm extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		//when we send the images with text  req.file has body send it img also text also like this way
-		const data = {
-			name: this.state.name,
-			description: this.state.description,
-			price: this.state.price,
-			isCod: this.state.isCod,
-			category: this.state.category,
-			stock: this.state.stock
-		}
-		// const data = new FormData();
-		// data.append("name", this.state.name);
-		// data.append("description", this.state.description);
-		// data.append("price", this.state.price);
-		// data.append("stock", this.state.stock);
-		// data.append("isCod", this.state.isCod);
-		// data.append("category", this.state.category);
-		// data.append("imageUrl", this.state.imageUrl);
+		// const data = {
+		// 	name: this.state.name,
+		// 	description: this.state.description,
+		// 	price: this.state.price,
+		// 	isCod: this.state.isCod,
+		// 	category: this.state.category,
+		// 	stock: this.state.stock
+		// }
+		const data = new FormData();
+		data.append("name", this.state.name);
+		data.append("description", this.state.description);
+		data.append("price", this.state.price);
+		data.append("stock", this.state.stock);
+		data.append("isCod", this.state.isCod);
+		data.append("category", this.state.category);
+		data.append("imageUrl", this.state.imageUrl);
 		this.props.handleSubmit(data);
 		if (
 			this.state.name.length < 3 &&
@@ -335,12 +336,13 @@ class ProductForm extends Component {
 								<FormControl>
 									<InputLabel htmlFor="category">Select Category</InputLabel>
 									<NativeSelect
-										native="true"
+										
+										value={this.state.category}
 										onChange={this.handleCategory}
 										input={<Input name="category" id="age-native-helper" />}
-										error={this.state.cError}
+										error={this.state.cError} 
 									>
-										<option value="" />
+										<option value="">Select Category</option>
 										{this.state.categories.map(cate => {
 											return (
 												<option value={cate._id} key={cate._id}>

@@ -16,7 +16,7 @@ class ProductEdit extends Component {
 			.get(`products/${this.props.match.params.id}`)
 			.then(response => {
 				const product = response.data;
-
+				// console.log(product)
 				this.setState(() => ({ product: product, isLoad: true }));
 			})
 			.catch(err => {
